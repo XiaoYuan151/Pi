@@ -2,7 +2,7 @@ import decimal
 import threading
 
 
-def compute_pi(precision, start, end):
+def compute_pi(precision, start, end, result):
     decimal.getcontext().prec = precision + 2  # Set precision (additional 2 for rounding)
 
     C = 426880 * decimal.Decimal(10005).sqrt()
@@ -20,7 +20,7 @@ def compute_pi(precision, start, end):
         K += 12
 
     pi = C / S
-    return str(pi)
+    result[start:end] = str(pi)[start:end]
 
 
 def main():
@@ -33,20 +33,33 @@ def main():
         except ValueError:
             print("Please enter a positive integer.")
 
-    num_threads = 4
+    while True:
+        try:
+            num_threads = int(input("Please enter the number of threads to use (default is 64): ") or "64")
+            if num_threads <= 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("Please enter a positive integer.")
+
     precision_per_thread = digits // num_threads
 
+    results = [''] * digits
+
+    threads = []
+    for i in range(num_threads):
+        start = i * precision_per_thread
+        end = (i + 1) * precision_per_thread if i < num_threads - 1 else digits
+        thread = threading.Thread(target=compute_pi, args=(digits, start, end, results))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    pi_str = ''.join(results)
     with open('Pi.txt', 'w') as f:
-        threads = [threading.Thread(target=lambda: f.write(
-            compute_pi(precision_per_thread, i * precision_per_thread, (i + 1) * precision_per_thread))) for i in
-                   range(num_threads)]
-
-        for thread in threads:
-            thread.start()
-
-        for thread in threads:
-            thread.join()
-
+        f.write(pi_str)
     print("Calculation completed. Result saved in Pi.txt.")
 
 
