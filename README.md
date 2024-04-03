@@ -1,6 +1,6 @@
 # Pi
-简单的 Pi 计算程序，可自定义计算位数\
-我们使用多线程计算，每次计算32位以保证不会溢出，并自动合并到本地文件 "Pi.txt" 中
+A simple Pi calculation program with customizable calculation digits\
+We use multi-threaded calculations, calculating 32 bits each time to ensure no overflow, and automatically merge into the local file "Pi.txt"
 
-## 如何使用
-Eh，你需要安装 Python 3.8+ 以保证运行此程序，并需要一台强劲的电脑以支持更多位数的运算
+## How to use
+Eh, you need Python 3.8+ installed to run this program, and a powerful computer to support more digit operations
