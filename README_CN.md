@@ -1,5 +1,5 @@
 # Pi
-EN[README.md] | CNEN[README_CN.md]
+[EN](README.md) | [CN](README_CN.md)
 简单的 Pi 计算程序，可自定义计算位数\
 我们使用多线程计算，每次计算32位以保证不会溢出，并自动合并到本地文件 "Pi.txt" 中
 
