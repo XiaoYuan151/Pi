@@ -1,6 +1,9 @@
 # Pi
-[EN](README.md) | [CN](README_CN.md)\
-A simple Pi calculation program with customizable calculation digits\
+
+[EN](README.md) | [CN](README_CN.md)
+
+A simple Pi calculation program with customizable calculation digits
+
 We use multi-threaded calculations, calculating 32 bits each time to ensure no overflow, and automatically merge into the local file "Pi.txt"
 
 ## How to use
